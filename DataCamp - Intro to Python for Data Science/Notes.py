@@ -8,3 +8,7 @@ c = 'a string of text'
 type(a)
 type(b)
 type(c)
+
+
+
+jh n b
