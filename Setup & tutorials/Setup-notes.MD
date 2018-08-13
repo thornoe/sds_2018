@@ -1,5 +1,5 @@
 ## Installations:
-- ATOM packages: pdf-view, language-latex, hydrogen-launcher, file-icons, atom-latex, script
+- ATOM packages: script, pdf-view, language-latex, hydrogen-launcher, file-icons, atom-latex
 - TeXLive works with atom-latex, MiKTeX does not!
 - Python is installed by installing Anaconda (choose "Add Anaconda to my PATH environment variable"), and running it through hydrogen in atom.
     i kommandprompt skriv: "apm" (tjek om det findes) og "apm install hydrogen"
@@ -11,5 +11,5 @@ Pre-installed Spell-check package
 - Add text.tex.latex to "Grammars"
 - Add the following line to "Excluded Scopes":
     support.function.tex, support.function.textit.latex, support.function.textbf.latex
-- Add "en-US" or others under locales (check "Use Locales").
+- Add "en-US, da-DK, es-ES" or others under locales (check "Use Locales").
   Check that English (United States) etc. is installed in Windows language settings.
