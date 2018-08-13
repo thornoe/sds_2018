@@ -1,4 +1,9 @@
 ## Dictionaries, Pandas, Logic, Control Flow and Filtering ##
+import pandas as pd
+import numpy as np
+
+## Import:
+    data = pd.read_csv("path/to/data.csv", index_col=0) # leave out "index" if not indexed
 
 # Dictionary VS list
     # use a list when the order matters
@@ -12,9 +17,6 @@
     del(europe['france'])
 
 # Pandas
-    import pandas as pd
-    data = pd.read_csv("path/to/data.csv", index_col=0) # leave out "index" if not indexed
-
     # Ex.1: Creating a DataFrame
         names = ['United States', 'Australia', 'Japan', 'India', 'Russia', 'Morocco', 'Egypt']
         dr =  [True, False, False, False, True, True, True]
@@ -34,8 +36,6 @@
 
 # iloc
     cars.iloc[[-3,-2]]
-
-import numpy as np
 
         # Ex.2 drives-right countries
         sel = cars[cars['drives_right']]
