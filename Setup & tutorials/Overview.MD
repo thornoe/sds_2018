@@ -1,3 +1,5 @@
+# See overview in lecture 5!
+
 # Webpages:
 https://pythonprogramming.net/
 - Easy to grasp tutorial.

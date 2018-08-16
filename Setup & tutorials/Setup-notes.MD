@@ -13,3 +13,11 @@ Pre-installed Spell-check package
     support.function.tex, support.function.textit.latex, support.function.textbf.latex
 - Add "en-US, da-DK, es-ES" or others under locales (check "Use Locales").
   Check that English (United States) etc. is installed in Windows language settings.
+
+## Linter
+- linter-pydocstyle & flake8 for Python (Ignore Error Codes: E266, W391, D100 in flake8)
+- linter-Markdown
+- linter-ui-default & linter-chktex for LaTex
+
+## Inspiration:
+https://gist.github.com/Aerijo/5b9522530715e5be6e89fc012e9a72a8

@@ -51,16 +51,20 @@ url
 
 resp = requests.get(url)
 resp.ok
-print(resp.text[:500])
-type()
+len(resp.text)
+resp.text[:500]
+resp_json = resp.json()
+resp_json
 
-with open('my_file.json', 'w') as f: # w: for writing, truncating first
+
+
+with open('my_file.json', 'w') as f:  # w: for writing, truncating first
     resp_json_str = json.dumps(resp.json())
     f.write(resp_json_str)
 
 
+resp_json_str
 
-help(open)
 
 
 

@@ -119,9 +119,9 @@ df = pd.read_csv(url, sep =';')  # semicolon separated
 df.head(3)
 df.tail(3)
 df.to_csv('DST_people_count.csv', index=False)
-#####################
-#     EXERCISES     #
-#####################
+##################################
+#            EXERCISES           #
+##################################
 ### Ex 4.1 Weather, part 1
 ## Ex. 4.1.1
 url_w = 'https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/1864.csv.gz'
@@ -146,9 +146,22 @@ df3b.count()
 df4 = pd.concat([df3, df3b], axis=1, sort=True)
 type(df3b)
 df4.tail(3)
-## 4.1.5
+## 4.1.5 reset index
+df4 = df4.reset_index(drop=True)
 
+## 4.1.6 sort by maximum temperature
+df_s = df4.sort_values(by=['value'])
+print('Min temp:', df_s['value'].iloc[0], 'on', df_s['date'].iloc[0], '\n'
+    'Max temp:', df_s['value'].iloc[-1], 'on', df_s['date'].iloc[-1])
 
+## 4.1.7 Save using relative path
+df_s.to_csv('Exercises/weather1864.csv', index=False)  # default is to save the index
 
+## 4.1.8 list comprehensions
+# make a list with the numbers from 0 to a million (10\*\*6),
+    # and add 3 to each element
+%%timeit
+[i+3 for i in range(10**6)]  # using list comprehensions
 
-help(pd.DataFrame.columns)
+%%timeit
+np.arange(10**6)+3  # using NumPy
