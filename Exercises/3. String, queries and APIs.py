@@ -9,8 +9,8 @@ import seaborn as sns
 import pprint
 
 # Ex. 3.1.1 substring
-s1='Chameleon'
-s2='ham'
+s1 = 'Chameleon'
+s2 = 'ham'
 s2 in s1
 'hello' in 'goodbye'
 
@@ -19,8 +19,15 @@ s1[-4:]
 s1.find('a')
 
 # Ex. 3.1.3 string formatting
-l1 = ['r ', 'Is', '>', ' < ', ' g', '?']
-print(l1[1]+' '+l1[0]+l1[2]+l1[-2]+l1[-1])
+l1 = ['r ', 'Is', '>', ' < ', 'g ', '?']
+l1[0]='Is'
+l1[1]='r'
+l1.pop(3)  # remove item 4 and report it
+l1 = [x.strip() for x in l1]  # remove spaces
+l1 = ",".join(l1)
+l1 = l1.replace(',',' ')
+l1 = l1[:-2] + l1[-1]
+l1
 
 # Ex. 3.1.4 dictionaries
 words={}
@@ -36,6 +43,7 @@ for letter in keys:
 pairs = zip(keys,values)
 words=dict(pairs)
 words
+
 # Ex. 3.1.5 .items()
 for keys, values in words.items():
     if values==True:

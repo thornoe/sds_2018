@@ -12,8 +12,8 @@ import pprint
 
 # matplotlib inline
 sns.set(style='ticks', palette="RdBu")
-for item in ax.get_yticklabels()+ax.get_xticklabels():
-    item.set_fontsize(12)
+# for item in ax.get_yticklabels()+ax.get_xticklabels():
+#     item.set_fontsize(12)
 
 # Data
 iris = sns.load_dataset('iris')
@@ -102,13 +102,13 @@ b.set_xlabel('Sepal length')
 b.set_ylabel('Petal length')
 # Ex. 5.1.4
 plt.show()
-# 5.4.1
+# 5.1.4
 sns.pairplot(iris, hue='species', vars=['petal_length', 'sepal_length'],
     diag_kind='kde', plot_kws=dict(s=50, linewidth=1), markers="+")  # markers set to circles, squares and diamonds: ['o', 's', 'D'], drop plot_kws then
 #####################################
 #   Ex. 5.2: Eplanatory Plotting    #
 #####################################
-
+f = sns.boxplot(x='sex', y='tip', data=tips)
 
 
 

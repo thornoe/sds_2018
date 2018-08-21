@@ -15,7 +15,7 @@ Pre-installed Spell-check package
   Check that English (United States) etc. is installed in Windows language settings.
 
 ## Linter
-- linter-pydocstyle & flake8 for Python (Ignore Error Codes: E266, W391, D100 in flake8)
+- linter-pydocstyle & flake8 for Python (Ignore Error Codes: D100, E266, E305, W391 in flake8)
 - linter-Markdown
 - linter-ui-default & linter-chktex for LaTex
 

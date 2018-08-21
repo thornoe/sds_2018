@@ -1,6 +1,7 @@
 import warnings
 import numpy as np
 import pandas as pd
+from Exercises.weather import weather_for_year
 
 # Other packages
 import os
@@ -37,15 +38,39 @@ tips\
 #   Exercise Set 7: Data structuring 3   #
 ##########################################
 ## 7.1 weather data, part 3
-df_64 = pd.read_csv("Exercises/weather1864.csv")
+df_64 = weather_for_year(1864)
 df_64.head(3)
-df_station = df_64['identifier']=='ITE00100550'
-df_ITE = df_64[df_station].copy()
-df_ITE.describe()
+station = df_64['station'] == 'ITE00100550'
+df_ITE = df_64[station].copy()
+df_ITE['value'].describe()
+df_ITE.head(3)
+# Plot by month
+split_var = ['month']
+apply_var = 'value'
+df_monthly = df_ITE\
+    .groupby(split_var)\
+    [apply_var]\
+    .describe()
 
-df_ITE.describe(include=[])
+
+df_ITE['value'].plot(x='date', title='Max temperature').set_ylabel('Degrees celsius')
 
 
+
+
+
+
+plt.legend()
+
+# # Mathias
+# split_var = ['station','month']
+# apply_var = 'obs_value'
+# monthly_weather = weather_1864\
+#     .groupby(split_var)\
+#     [apply_var]\
+#     .describe()
+#
+# monthly_weather.loc['ITE00100550'].plot(y = ['mean','std','25%','75%','min','max'])
 
 
 
