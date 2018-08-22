@@ -1,32 +1,23 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 import pprint as p
-import requests, random, datetime
+import requests, random, datetime, re, time
 
 ## Packages for scraping
-import re, time, json  # for connecting to the internet
 from bs4 import BeautifulSoup  # for parsing
 from selenium import webdriver
 import explore_regex as e_re
+import json
 
 %matplotlib inline
-
-import numpy as np
-import datetime
-import pandas as pd
-import matplotlib.pyplot as plt
-import random
-
 ## Functions
 pp = p.PrettyPrinter()
 
-%matplotlib inline
 ## plot styles
 sns.set_style('white')
 plt.style.use('seaborn-white')
-
 
 ###############################################################
 #              Interactions and Automated Browsing            #
@@ -191,5 +182,34 @@ for i in range(len(rows)):
 df = pd.DataFrame(df, columns=columns)
 df.set_index('Eastern Conference', inplace=True)
 
-
 pp.pprint(row)
+
+#########################################################################
+#            Exercise Section 9.2: Text search in reviews               #
+#########################################################################
+### 9.2.1
+# Table of entire data
+df = pd.read_csv('https://raw.githubusercontent.com/snorreralund/scraping_seminar/master/english_review_sample.csv')
+# List of all reviews
+sample_string = '\n'.join(df.sample(2000).reviewBody)
+# sample_string = '\n'.join(df[df.hasNumber].sample(2000).reviewBody)
+# print(sample_string)
+
+### 9.2.2
+explore_money = e_re.ExploreRegex(sample_string)
+d1 = '\d*\.*\d*\$\d*\.*\d*'
+d2 =  '\$\s?\d+\.*\d*'
+d3 = '[\d+\.\d*][\s][\$]'
+d4 = '[\$][\s]\d*\.\d*.'
+d5 = '\d+\s{1,}dollar.'
+d6 = '\d+\s?[USD|usd].'
+
+patterns = [d1, d2, d3, d4, d5, d6]
+
+for pattern in patterns:
+    explore_money.explore_difference(pattern, patterns[0])
+
+explore_money.explore_pattern(d5)  # explore context
+
+### 9.2.3 print all patterns
+explore_money.report()

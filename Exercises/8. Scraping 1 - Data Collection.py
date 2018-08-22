@@ -144,11 +144,18 @@ session.headers
 ###############################################################
 #                           Exercise 8                        #
 ###############################################################
-# Answer to 8.1.2
+### 8.1.2: Collect the 1st page
 url = 'https://job.jobnet.dk/CV/FindWork/Search'
-response = requests.get(url)
+resp = requests.get(url)        # We use the request module to collect the first page of job postings
+jobnet = json.loads(resp.text)
+jobnet
 
+# Unpack the json data into a pandas DataFrame
+jobnet.keys()  # Use this command to get an idea of what the data contains
+jobnet_1 = pd.DataFrame(jobnet['JobPositionPostings'])  # Creates a Panda DataFrame of job postings
+jobnet_1.head()  # Prints head of DataFrame
 
-# The browser does the next call automatically
-url = 'https://job.jobnet.dk/CV/FindWork/Search'
-response = requests.get(url)
+### 8.1.3
+# Create a variable with the number of job postings
+antal_stillinger = jobnet['TotalResultCount']
+antal_stillinger

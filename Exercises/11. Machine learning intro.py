@@ -255,7 +255,7 @@ test_score = accuracy_score(ytest, fitted_model.predict(Xtest))
 print(f"On the training data we get a score of {round(train_score, 2)}, while the score on the test data is {round(test_score, 2)}")
 
 #############################################################################
-#                     Ex. 11.3: AdaLine                      #
+#                               Ex. 11.3: AdaLine                           #
 #############################################################################
 # Adaline: Adaptive Linear Neuron (no transformation of the net-input)
 
