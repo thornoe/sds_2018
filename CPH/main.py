@@ -36,15 +36,12 @@ raw_data.to_csv('CPH/Data/raw_data.csv', index=False)  # Save scraped data
 #                               Data cleaning                                #
 ##############################################################################
 # !pip3 install geopy
+# !pip3 install tqdm
 raw_data = pd.read_csv('CPH/Data/raw_data.csv')
 cph = datastructuring(raw_data)
-cph.isnull().sum()
-
-
-    # # Now sort columns in order which makes sence
-    # bolighed =sorted_data.reindex(columns=['Address','Zip_code','Town', 'Latitude', 'Longitude' ,'Rooms',
-    #                                     'Area', 'Land_area','Sqm_price','Price','Owner_expense', 'Price_development',
-    #                                     'Energy_mark','Energy_saving', 'Days_on_market'])
+cph.to_csv('CPH/Data/cph.csv', index=False)  # Save scraped data
+raw_data = pd.read_csv('https://raw.githubusercontent.com/thornoe/sds_2018/master/CPH/Data/raw_data.csv')
+raw_data.head()
 
 
 ##############################################################################

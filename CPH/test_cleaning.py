@@ -1,12 +1,12 @@
 # import packages
 import numpy as np
 import pandas as pd
-import time
-# GeoPy - see https                            ://pypi.org/project/geopy/
+import time, tqdm
+# GeoPy - see https://pypi.org/project/geopy/
 import geopy.geocoders
 from geopy.geocoders import Nominatim # retrieve coordinates from addresses etc.
 geopy.geocoders.options.default_user_agent = 'my_app/1'
-geopy.geocoders.options.default_timeout = 7
+geopy.geocoders.options.default_timeout = 5
 
 # read data
 raw_data = pd.read_csv('CPH/Data/raw_data.csv')
@@ -68,6 +68,7 @@ for i, row in cph['Energy_mark'].iteritems():
         energysaving.append(None)
 cph.insert(loc=0, column='Energy_saving', value=energysaving)
 
+# Create 'floor' variable
 floor = []
 for i, row in cph['Address'].iteritems():
     if ',' in row:
@@ -83,14 +84,16 @@ for i, row in cph['Address'].iteritems():
         floor.append(int(0))
 cph.insert(loc=0, column='Floor', value=floor)
 ##############################################################################
-# Code latitude and longitude using GeoPy #
+#                   Code latitude and longitude using GeoPy                  #
 ##############################################################################
 address_simple = []
 for i, row in cph['Address'].iteritems():
-    if 'HUSBÅD' in row:
-        address_simple.append(row.split(' - HUSBÅD', 1)[0])  # Keep first part
+    if 'George Marshalls Vej' in row:
+        address_simple.append('Fiskerihavnsgade 8')
     elif 'Amerika Plads' in row:
         address_simple.append(row.replace('Plads', 'Pl.'))
+    elif 'HUSBÅD' in row:
+        address_simple.append(row.split(' - HUSBÅD', 1)[0])  # Keep first part
     else:
         address_simple.append(row.split(',', 1)[0]) # split once, keep 1st part
 cph.insert(loc=0, column='Address_simple', value=address_simple)
@@ -98,9 +101,9 @@ cph.insert(loc=0, column='Address_simple', value=address_simple)
 town_simple = []
 for i, row in cph['Town'].iteritems():
     if 'København' in row:
-        town_simple.append(row.split(' ', 1)[0])  # Keep 'København' only
-    # elif "Frederiksberg C" in row:
-    #     town_simple.append(row.split(' ', 1)[0])  # Keep 'Frederiksberg' only
+        town_simple.append('København')  # Keep 'København' only
+    elif 'Nordhavn' in row:
+        town_simple.append('København')  # Keep 'København' only
     else:
         town_simple.append(row)
 cph.insert(loc=0, column='Town_simple', value=town_simple)
@@ -119,36 +122,48 @@ lati = []
 longi = []
 # add = []
 
-for row in cph['Full_add']:
+for row in tqdm.tqdm(cph['Full_add']):
     row_string = str(row)
     if len(row_string) > 0:
         location = geolocator.geocode(row_string)
         if isinstance(location, geopy.location.Location):
-            lati.append(location.latitude)
-            longi.append(location.longitude)
-            # add.append(location.address)
+            lati.append(float(location.latitude))
+            longi.append(float(location.longitude))
+            # add.append(float(location.address))
+            time.sleep(5)
         else:
             print('Not found: ',row_string)
             lati.append(None)
             longi.append(None)
+            time.sleep(5)
     else:
         lati.append(None)
         longi.append(None)
-    time.sleep(7)
-print('Done!')
+cph.insert(loc=0, column='Lati', value=lati)
+cph.insert(loc=0, column='Longi', value=longi)
+cph['Latitude'] = cph['Latitude'].fillna(cph['Lati'])
+cph['Longitude'] = cph['Longitude'].fillna(cph['Longi'])
 
-cph.insert(loc=0, column='Latitude', value=latitude)
-cph.insert(loc=0, column='Longitude', value=longitude)
-    # Create 'Floor' ---> make NANs into something weird
-    # # Now sort columns in order which makes sence
-# bolighed =cph.reindex(columns=['Address','Zip_code','Town', 'Latitude', 'Longitude' ,'Rooms',
-# 'Area', 'Land_area','Sqm_price','Price','Owner_expense', 'Price_development',
-# 'Energy_mark','Energy_saving', 'Days_on_market'])
+# # Now sort columns in order which makes sence
+cph = cph.drop(['Longi', 'Lati', 'Town_simple', 'Address_simple',
+    'Full_address', 'Missing', 'Full_add'], axis=1)
+cph = cph.reindex(columns=['Address','Zip_code','Town', 'Latitude', 'Longitude' ,
+    'Floor', 'Rooms', 'Area', 'Land_area','Sqm_price','Price','Owner_expense',
+    'Price_development', 'Energy_mark','Energy_saving', 'Days_on_market'])
+print(cph.isnull().sum())
 return cph
 
-# Search for a single item
-location = geolocator.geocode('Århus Privatskole')
-type(location)
-location.address
-isinstance(location, geopy.location.Location)
-location.latitude
+# [Search for a single item in GeoPy:]
+import geopy.geocoders
+from geopy.geocoders import Nominatim # retrieve coordinates from addresses etc.
+geopy.geocoders.options.default_user_agent = 'my_app/1'
+geolocator = Nominatim()
+location = geolocator.geocode('Sølvgade Skole')
+
+if isinstance(location, geopy.location.Location):
+    print('Address:', location.address,
+        '\nLatitude:', location.latitude,
+        '\nLongitude:', location.longitude)
+else:
+    print(type(location),
+    '\nWas found:', isinstance(location, geopy.location.Location))
