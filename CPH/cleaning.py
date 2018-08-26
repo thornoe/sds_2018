@@ -148,7 +148,7 @@ def datastructuring(data):
         'Full_address', 'Missing', 'Full_add'], axis=1)
     cph = cph.reindex(columns=['Address','Zip_code','Town', 'Latitude', 'Longitude' ,
         'Floor', 'Rooms', 'Area', 'Land_area','Sqm_price','Price','Owner_expense',
-        'Price_development', 'Energy_mark','Energy_saving', 'Days_on_market'])
+        'Price_development', 'Days_on_market', 'Energy_mark','Energy_saving'])
     print(cph.isnull().sum())
     return cph
 

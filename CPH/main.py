@@ -28,22 +28,26 @@ plt.style.use('seaborn-ticks')
 ##############################################################################
 # OBS ONLY RUN THIS ONCE. It takes around 18 minuttes.
 # !pip3 install tqdm
-data = scrape_bolighed(5.0)  # ONLY RUN ONCE. Set sleep time to at least 5 seconds
-raw_data = pd.DataFrame(data)
+raw_data = scrape_bolighed(5.0)  # ONLY RUN ONCE. Set sleep time to at least 5 seconds
+raw_data = pd.DataFrame(raw_data)
 raw_data.to_csv('CPH/Data/raw_data.csv', index=False)  # Save scraped data
 
 ##############################################################################
 #                               Data cleaning                                #
 ##############################################################################
-# !pip3 install geopy
 # !pip3 install tqdm
+# !pip3 install geopy
 raw_data = pd.read_csv('CPH/Data/raw_data.csv')
 cph = datastructuring(raw_data)
 cph.to_csv('CPH/Data/cph.csv', index=False)  # Save scraped data
+
 raw_data = pd.read_csv('https://raw.githubusercontent.com/thornoe/sds_2018/master/CPH/Data/raw_data.csv')
 raw_data.head()
+
 
 
 ##############################################################################
 #              Implementing the K-means Clustering algorithm                 #
 ##############################################################################
+cph = pd.read_csv('CPH/Data/cph.csv')
+cph.isnull().sum()
