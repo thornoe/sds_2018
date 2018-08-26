@@ -13,7 +13,7 @@ import json
 
 %matplotlib inline
 ## Functions
-pp = p.PrettyPrinter()
+pp = p.PrettyPrinter()  # pp.pprint(
 
 ## plot styles
 sns.set_style('white')

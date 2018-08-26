@@ -30,7 +30,7 @@ def get(url, iterations=10, check_function=lambda x: x.ok):
     return None # your code will purposely crash if you don't create a check function later.
 
 ## Functions
-pp = p.PrettyPrinter()
+pp = p.PrettyPrinter()  # pp.pprint()
 
 %matplotlib inline
 ## plot styles
@@ -117,7 +117,7 @@ for study_board_link in study_board_links:
     links = ['https://www.kurser.ku.dk'+link for link in link]
 
 len(links)
-random.sample(links,1)
+random.sample(links,5)
 
 ###############################################################
 #                 How URLS are constructed                    #
