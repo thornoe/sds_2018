@@ -73,8 +73,9 @@ floor = []
 for i, row in cph['Address'].iteritems():
     if ',' in row:
         sec_part = row.split(', ', 1)[1] # split once, keep 2nd part
-        if sec_part[:2].isdigit():
-            floor.append(None) # 399 with two or more digits (unindentified floor, 362 >= '20')
+        if sec_part[:2].isdigit():  # 399 with two or more digits (unindentified floor, 362 >= '20')
+            floor_int = int(sec_part[0])  # assume first digit indicates floor
+            floor.append(floor_int)
         elif sec_part[0].isdigit():
             floor_int = int(sec_part[0])
             floor.append(floor_int)
@@ -113,6 +114,10 @@ cph['Full_address'] = cph['Address_simple'].map(str) + ', ' + cph['Zip_code'].ma
 # Thoose with missing latitude and longitude from scrape
 cph['Missing'] = cph['Longitude'].isnull()
 cph['Full_add'] = cph['Full_address']*cph['Missing']
+for row in tqdm.tqdm(cph['Full_add']):
+    row_string = str(row)
+    if len(row_string) > 0:
+        print(row_string)
 
 # Retrieve coordinates from column of addresses
 geolocator = Nominatim()

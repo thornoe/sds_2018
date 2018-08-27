@@ -5,8 +5,7 @@
 import numpy as np
 import pandas as pd
 import time, tqdm
-# GeoPy - see https://pypi.org/project/geopy/
-import geopy.geocoders
+import geopy.geocoders  # GeoPy - see https://pypi.org/project/geopy/
 from geopy.geocoders import Nominatim # retrieve coordinates from addresses etc.
 geopy.geocoders.options.default_user_agent = 'my_app/1'
 geopy.geocoders.options.default_timeout = 1
@@ -45,6 +44,7 @@ schools.insert(loc=0, column='Address', value=address)
 # import numpy as np
 # import pandas as pd
 # import time, tqdm
+# import geopy.geocoders  # GeoPy - see https://pypi.org/project/geopy/
 # from geopy.geocoders import Nominatim  # retrieve coordinates from addresses etc.
 # geopy.geocoders.options.default_user_agent = 'my_app/1'
 #

@@ -38,13 +38,8 @@ raw_data.to_csv('CPH/Data/raw_data.csv', index=False)  # Save scraped data
 # !pip3 install tqdm
 # !pip3 install geopy
 raw_data = pd.read_csv('CPH/Data/raw_data.csv')
-cph = datastructuring(raw_data)
+cph = datastructuring(raw_data, 15)  # set default_timeout for GeoPy
 cph.to_csv('CPH/Data/cph.csv', index=False)  # Save scraped data
-
-raw_data = pd.read_csv('https://raw.githubusercontent.com/thornoe/sds_2018/master/CPH/Data/raw_data.csv')
-raw_data.head()
-
-
 
 ##############################################################################
 #              Implementing the K-means Clustering algorithm                 #
