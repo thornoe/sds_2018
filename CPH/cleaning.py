@@ -187,7 +187,7 @@ def datastructuring(data, timeout):
         'Energy_saving', 'Days_on_market'])
 
     # Create log variable of square meter price
-    cph.insert(loc=9, column='log_sqm_price', value=np.log(cph.Sqm_price))
+    cph_kom.insert(loc=9, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
 
     print(cph_kom.isnull().sum())
 
