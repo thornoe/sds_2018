@@ -1,9 +1,14 @@
+!pip3 install geopandas
+
 # [Import packages]
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from shapely.geometry import Point
 import matplotlib.pyplot as plt
 import tqdm, random  # os, datetime, re, time, requests, json
+
+import geopandas as gpd  # GeoPandas
 
 # Cluster analysis
 # from sklearn.cluster import KMeans  # linear methods
@@ -13,15 +18,13 @@ import tqdm, random  # os, datetime, re, time, requests, json
 from sklearn.metrics import pairwise_distances  # for K means
 
 %matplotlib inline
-## plot styles
-sns.set_style('ticks')
-plt.style.use('seaborn-ticks')
 
 ##############################################################################
 #         Coding functions for the the K-means Clustering algorithm          #
 ##############################################################################
-def initialize_clusters(X, k):
+def initialize_clusters(X, k, seed):
     """Initialization: first Expectation of the cluster centroids (centers)"""
+    random.seed(2900)
     idx = random.sample(range(len(X)), k)
     centroids = X[idx]
     return centroids
@@ -46,10 +49,10 @@ def update_expectation(X, k, cluster_assignment):
     return new_centroids
 
 # Convergence
-def fit_transform(X, k, max_iter):
-    old_centroids = initialize_clusters(X, k)
+def fit_transform(X, k, max_iter, seed):
+    old_centroids = initialize_clusters(X, k, seed)
     iterations = 0
-    for i in tqdm.tqdm(np.arange(max_iter)):
+    for i in np.arange(max_iter):
         cluster_assignment = maximize(X, old_centroids)
         new_centroids = update_expectation(X, k, cluster_assignment)
         if np.array_equal(old_centroids, new_centroids):
@@ -57,7 +60,8 @@ def fit_transform(X, k, max_iter):
         else:
             old_centroids = new_centroids
             iterations = iterations + 1
-    print('Iterations:', iterations)
+    print('Centroids:', '\n', old_centroids,
+        '\nIterations:', '\n', iterations,)
     return cluster_assignment, old_centroids
 
 ##########################################################################
@@ -67,82 +71,100 @@ def fit_transform(X, k, max_iter):
 # !pip3 install tqdm
 cph = pd.read_csv('CPH/Data/cph.csv')
 gentofte = cph.loc[cph['Municipality'] == 'Gentofte']
-
-X = gentofte.loc[:,['Latitude', 'Longitude', 'log_sqm_price']].values  # Define a matrix using the .values method
-
-##########################################################################
-#                         Clusters in Gentofte                          #
-##########################################################################
-# k = 10  # number of closters
-for k in range(4,14):
-    cluster_assignment, centroids = fit_transform(X, k, max_iter)  # Set the number of clusters
-    XD = pd.DataFrame(X)
-    XD.columns = ['Latitude', 'Longitude', 'log_sqm_price']
-    XD.insert(loc=3, column='Cluster', value=cluster_assignment)
-    centroids = pd.DataFrame(centroids)
-    centroids.columns = ['Latitude', 'Longitude', 'log_sqm_price']
-    num_range = range(0, k)
-    centroids.insert(loc=3, column='Cluster', value=num_range)
-
-    fig, ax = plt.subplots(figsize = (15, 15*0.625))
-    ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(300,600), palette="Paired", legend=False, data=centroids, marker='x')
-
-    fig, ax = plt.subplots(figsize = (15, 15*0.625))
-    ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(300,600), palette="Paired", legend=False, data=centroids, marker='x')
-    ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(1,300), palette="Paired", legend=False, data=XD,)
-
+seed = 100
 
 ##########################################################################
-#                         Clusters in Gentofte                          #
+#            Clusters in Greater Copenhagen - 3-dimensional              #
 ##########################################################################
-X = gentofte.loc[:,['Latitude', 'Longitude', 'log_sqm_price']].values  # Define a matrix using the .values method
+X = cph.loc[:,['Latitude', 'Longitude', 'log_sqm_price']].values  # Define a matrix using the .values method
+
 max_iter = 100  # maximum number of iterations
-k = 10  # number of closters
-cluster_assignment, centroids = fit_transform(X, k, max_iter)  # Set the number of clusters
+k = 3  # number of clusters
+cluster_assignment, centroids = fit_transform(X, k, max_iter, seed)  # Set the number of clusters
 
-XD = pd.DataFrame(X)
-XD.columns = ['Latitude', 'Longitude', 'log_sqm_price']
+
+XD = cph.reindex(columns = ['Latitude', 'Longitude', 'log_sqm_price'])
 XD.insert(loc=3, column='Cluster', value=cluster_assignment)
+
 centroids = pd.DataFrame(centroids)
 centroids.columns = ['Latitude', 'Longitude', 'log_sqm_price']
 num_data = range(0,k)
 centroids.insert(loc=3, column='Cluster', value=num_data)
-centroids
+
+# Plot
+sns.set(style='ticks')
+fig, ax = plt.subplots(figsize = (15, 15*0.87))
+ax = ax1, ax2
+ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(1,300), palette="Paired", legend='brief', data=XD, alpha=0.4)
+ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(800,1200), palette="Paired", legend=False, data=centroids, marker='X', alpha=0.9)
+fig.savefig("CPH/Fig/cluster.pdf", dpi=600, bbox_inches='tight')
+
+XD.loc[XD['Cluster'] == 0].describe()
+XD.loc[XD['Cluster'] == 1].describe()
+XD.loc[XD['Cluster'] == 2].describe()
+
+# latitude_span = 55.94 - 55.522
+# longitude_span = 12.67 - 12.19
+# print(latitude_span / longitude_span)
+
+##########################################################################
+#                    GeoPandas Cities - Copenhagen                       #
+##########################################################################
+
+
+
+##########################################################################
+#                 Clusters in Gentofte - 3-dimensional                   #
+##########################################################################
+X = gentofte.loc[:,['Latitude', 'Longitude', 'log_log_sqm_price']].values  # Define a matrix using the .values method
+
+max_iter = 100  # maximum number of iterations
+k = 3  # number of clusters
+cluster_assignment, centroids = fit_transform(X, k, max_iter, seed)  # Set the number of clusters
+
+XD = gentofte.reindex(columns = ['Latitude', 'Longitude', 'log_log_sqm_price'])
+XD.insert(loc=3, column='Cluster', value=cluster_assignment)
+
+centroids = pd.DataFrame(centroids)
+centroids.columns = ['Latitude', 'Longitude', 'log_log_sqm_price']
+num_data = range(0,k)
+centroids.insert(loc=3, column='Cluster', value=num_data)
+
+fig, ax = plt.subplots(figsize = (15, 15*0.625))
+ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_log_sqm_price', sizes=(300,600), palette="Paired", legend=False, data=centroids, marker='x')
+ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_log_sqm_price', sizes=(1,300), palette="Paired", legend=False, data=XD,)
+# fig1.set(ylabel='Price per square meter', xlabel='Area', title='Log log_sqm price plottet against area with rooms as hue')
+
+XD.loc[XD['Cluster'] == 0].describe()
+XD.loc[XD['Cluster'] == 1].describe()
+XD.loc[XD['Cluster'] == 2].describe()
+
+##########################################################################
+# Clusters in Gentofte - n-dimensional, n is number of numeric variables #
+##########################################################################
+X = gentofte.loc[:,['Zip_code', 'Latitude', 'Longitude', 'Floor', 'Rooms',
+    'Area', 'Land_area', 'log_log_sqm_price', 'Owner_expense', 'Price_development',
+    'Energy_saving', 'Days_on_market']].values  # Define a matrix using the .values method
+
+max_iter = 100  # maximum number of iterations
+k = 3  # number of clusters
+cluster_assignment, centroids = fit_transform(X, k, max_iter)  # Set the number of clusters
+
+XD = gentofte.reindex(columns = ['Latitude', 'Longitude', 'log_log_sqm_price'])
+XD.insert(loc=3, column='Cluster', value=cluster_assignment)
+
+centroids = pd.DataFrame(centroids)
+centroids = centroids.iloc[:,[1, 2, 7]]
+centroids.columns = ['Latitude', 'Longitude', 'log_log_sqm_price']
+num_data = range(0,k)
+centroids.insert(loc=3, column='Cluster', value=num_data)
+
+fig, ax = plt.subplots(figsize = (15, 15*0.625))
+ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_log_sqm_price', sizes=(300,600), palette="Paired", legend=False, data=centroids, marker='x')
+ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_log_sqm_price', sizes=(1,300), palette="Paired", legend=False, data=XD,)
+# fig1.set(ylabel='Price per square meter', xlabel='Area', title='Log log_sqm price plottet against area with rooms as hue')
+
 # XD.describe()
 # latitude_span = 55.77 - 55.72
 # longitude_span = 12.60 - 12.52
 # print(latitude_span / longitude_span)
-
-fig, ax = plt.subplots(figsize = (10, 10*0.625))
-ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(200,400), palette="Paired", legend=False, data=centroids, marker='x')
-ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', size = 'log_sqm_price', sizes=(1,300), palette="Paired", legend=False, data=XD,)
-
-
-fig1.set(ylabel='Price per square meter', xlabel='Area', title='Log sqm price plottet against area with rooms as hue')
-
-
-
-##########################################################################
-#                         Clusters in Greater Cph                        #
-##########################################################################
-X = cph.loc[:,['Latitude', 'Longitude', 'log_sqm_price']].values  # Define a matrix using the .values method
-max_iter = 100  # maximum number of iterations
-cluster_assignment, centroids = fit_transform(X, 20, max_iter)  # Set the number of clusters
-
-XD = pd.DataFrame(X)
-XD.columns = ['Latitude', 'Longitude', 'log_sqm_price']
-XD.insert(loc=3, column='Cluster', value=cluster_assignment)
-
-
-latitude_span = 55.94 - 55.522
-longitude_span = 12.67 - 12.19
-latitude_span
-longitude_span
-span_relative = latitude_span / longitude_span
-span_relative
-
-fig, ax = plt.subplots(figsize = (20, 20*0.87))
-ax1 = sns.scatterplot(x='Longitude', y='Latitude', data=XD, size = 'log_sqm_price', sizes=(1,100), hue='Cluster', palette="Paired", legend=False)
-
-
-fig1.set(ylabel='Price per square meter', xlabel='Area', title='Log sqm price plottet against area with rooms as hue')

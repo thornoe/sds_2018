@@ -193,9 +193,39 @@ cph_kom =cph_merged.reindex(columns=['Address', 'Zip_code', 'Municipality',
 # Create log variable of square meter price
 cph_kom.insert(loc=9, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
 
+# Standard-Finance
+cph_kom = pd.read_csv('CPH/Data/cph.csv')
+
+yearly_expenses = []
+first_year_expenses = []
+for houseprice, ownerexp in zip(cph_kom.Price, cph_kom.Owner_expense):
+    """Vi antager at køberne selvfinansiere de 20 % af købssummen således:"""
+    remaining = houseprice % 5000  # rest, når der deles med 5.000
+    price = houseprice*0.05
+    if remaining < 2500:
+        price = int(price / 5000) * 5000  # runder ned
+    else:
+        price = int((price + 5000) / 5000) * 5000  # runder op
+    Cashticket = max(price,25000)  # Kontant udbetaling på 5% af den kontante købesum oprundet til nærmeste kr. 5.000 dog minimum kr. 25.000.
+    Mortgage = (houseprice*0.8)*0.03  # Der lånes 80% i realkreditinstitutet til en ÅOP på 3% efter skat.
+    Bankloan = (houseprice*0.2 - Cashticket)*0.066  # De resterende ca. 15% lånes i banken til en ÅOP på 6.6% efter skat banklånet
+    yearly_expenses.append(12*ownerexp + Bankloan + Mortgage)
+    first_year_expenses.append(12*ownerexp + Bankloan + Mortgage + Cashticket)
+cph_kom.insert(loc=13, column='Yearly_expenses', value=yearly_expenses)
+cph_kom.insert(loc=14, column='First_year_expenses', value=first_year_expenses)
+
+cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses']].head()
+cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses']].describe(percentiles = [.25, .5, .75])
+
+
+
 print(cph_kom.isnull().sum())
 
 return cph_kom
+
+
+
+
 
 # [Search for a single item in GeoPy:]
 # import packages
