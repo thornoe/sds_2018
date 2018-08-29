@@ -194,8 +194,6 @@ cph_kom =cph_merged.reindex(columns=['Address', 'Zip_code', 'Municipality',
 cph_kom.insert(loc=9, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
 
 # Standard-Finance
-cph_kom = pd.read_csv('CPH/Data/cph.csv')
-
 yearly_expenses = []
 first_year_expenses = []
 for houseprice, ownerexp in zip(cph_kom.Price, cph_kom.Owner_expense):
@@ -213,19 +211,15 @@ for houseprice, ownerexp in zip(cph_kom.Price, cph_kom.Owner_expense):
     first_year_expenses.append(12*ownerexp + Bankloan + Mortgage + Cashticket)
 cph_kom.insert(loc=13, column='Yearly_expenses', value=yearly_expenses)
 cph_kom.insert(loc=14, column='First_year_expenses', value=first_year_expenses)
-
-cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses']].head()
-cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses']].describe(percentiles = [.25, .5, .75])
-
-
+log_yearly_sqm_exp = cph_kom.Yearly_expenses / cph_kom.Area
+cph_kom.insert(loc=15, column='log_yearly_sqm_exp', value=log_yearly_sqm_exp)
 
 print(cph_kom.isnull().sum())
 
 return cph_kom
 
-
-
-
+# cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses', 'log_yearly_sqm_exp']].head()
+# cph_kom.loc[:, ['Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses', 'log_yearly_sqm_exp']].describe(percentiles = [.25, .5, .75])
 
 # [Search for a single item in GeoPy:]
 # import packages
