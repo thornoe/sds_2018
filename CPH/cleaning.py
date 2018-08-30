@@ -69,7 +69,7 @@ def datastructuring(data, timeout):
     cph.insert(loc=0, column='Energy_saving', value=energysaving)
 
     # Set all missing values with energy_saving to mean.
-    cph.Energy_saving.fillna(5.0, inplace=True)
+    cph.Energy_saving.fillna(4, inplace=True)
 
     # Create 'floor' variable
     floor = []
