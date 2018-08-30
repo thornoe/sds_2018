@@ -208,8 +208,8 @@ def datastructuring(data, timeout):
     cph_kom.insert(loc=13, column='Yearly_expenses', value=yearly_expenses)
     cph_kom.insert(loc=14, column='First_year_expenses', value=first_year_expenses)
     yearly_sqm_exp = (cph_kom.Yearly_expenses / cph_kom.Area)
-    cph_kom.insert(loc=15, column='log_yearly_sqm_exp', value=np.log(yearly_sqm_exp))
-
+    cph_kom.insert(loc=15, column='Yearly_sqm_exp', value=(yearly_sqm_exp))
+    cph_kom.insert(loc=16, column='log_yearly_sqm_exp', value=np.log(yearly_sqm_exp))
     print(cph_kom.isnull().sum())
 
     return cph_kom
