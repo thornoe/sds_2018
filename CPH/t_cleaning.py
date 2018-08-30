@@ -214,9 +214,9 @@ for houseprice, ownerexp in zip(cph_kom.Price, cph_kom.Owner_expense):
     first_year_expenses.append(12*ownerexp + Bankloan + Mortgage + Cashticket)
 cph_kom.insert(loc=15, column='Yearly_expenses', value=yearly_expenses)
 cph_kom.insert(loc=16, column='First_year_expenses', value=first_year_expenses)
-yearly_sqm_exp = (cph_kom.Yearly_expenses / cph_kom.Area)
-cph_kom.insert(loc=17, column='Sqm_yearly_exp', value=(yearly_sqm_exp))
-cph_kom.insert(loc=18, column='log_yearly_sqm_exp', value=np.log(yearly_sqm_exp))
+sqm_yearly_exp = (cph_kom.Yearly_expenses / cph_kom.Area)
+cph_kom.insert(loc=17, column='Sqm_yearly_expenses', value=(sqm_yearly_exp))
+cph_kom.insert(loc=18, column='log_sqm_yearly_exp', value=np.log(sqm_yearly_exp))
 
 print(cph_kom.isnull().sum())
 
