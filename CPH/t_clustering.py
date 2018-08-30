@@ -20,7 +20,7 @@ from sklearn.metrics import pairwise_distances  # for K means
 ##############################################################################
 def initialize_clusters(X, k, seed):
     """Initialization: first Expectation of the cluster centroids (centers)"""
-    random.seed(2900)
+    random.seed(seed)
     idx = random.sample(range(len(X)), k)
     centroids = X[idx]
     return centroids
@@ -58,7 +58,7 @@ def fit_transform(X, k, max_iter, seed):
             iterations = iterations + 1
     print('Centroids:', '\n', old_centroids,
         '\nIterations:', '\n', iterations,)
-    return cluster_assignment, old_centroids
+    return cluster_assignment, old_centroids, iterations
 
 ##########################################################################
 #             Implementing the K-means Clustering algorithm              #
@@ -66,7 +66,7 @@ def fit_transform(X, k, max_iter, seed):
 # RUN THE CODE FOR CLUSTERING
 # !pip3 install tqdm
 cph = pd.read_csv('CPH/Data/cph.csv')
-seed = 2700
+seed = 2900
 
 ##########################################################################
 #            Clusters in Greater Copenhagen - 3-dimensional              #
@@ -75,7 +75,7 @@ X = cph.loc[:,['Latitude', 'Longitude', 'log_sqm_price']].values  # Define a mat
 
 max_iter = 100  # maximum number of iterations
 k = 3  # number of clusters
-cluster_assignment, centroids = fit_transform(X, k, max_iter, seed)  # Set the number of clusters
+cluster_assignment, centroids, iterations = fit_transform(X, k, max_iter, seed)  # Set the number of clusters
 
 XD = cph.reindex(columns = ['Latitude', 'Longitude', 'log_sqm_price', 'Sqm_price'])
 XD.insert(loc=3, column='Cluster', value=cluster_assignment)
@@ -117,14 +117,14 @@ descriptives = CPH_desc.transpose()
 descriptives.to_latex()  # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_latex.html
 CPH_desc
 
+### Number of iterations for different seed numbers
+# no_iterations = []
+# for seed in range(0, 500):
+#     cluster_assignment, centroids, iterations = fit_transform(X, k, max_iter, seed)  # Set the number of clusters
+#     no_iterations.append(iterations)
+# np.unique(no_iterations, return_counts=False)
 
-# Round of decimal points and choose descriptives of interest.
-
-
-
-
-data_3
-
+### Map dimensions
 # latitude_span = 55.94 - 55.522
 # longitude_span = 12.67 - 12.19
 # print(latitude_span / longitude_span)
@@ -132,7 +132,7 @@ data_3
 #        Clusters in Greater Copenhagen - log yearly sqm expenses        #
 ##########################################################################
 Z = cph.loc[:,['Latitude', 'Longitude', 'log_yearly_sqm_exp']].values  # Define a matrix using the .values method
-
+seed = 2900
 max_iter = 100  # maximum number of iterations
 k = 3  # number of clusters
 cluster_assignment, centroids = fit_transform(Z, k, max_iter, seed)  # Set the number of clusters

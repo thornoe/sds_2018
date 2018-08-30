@@ -60,13 +60,13 @@ plt.scatter(X[:, 0], X[:, 1], c=labels,
 # - Problem: lacks interpretable global properties.
 
 ### DOESN'T WORK - CAN'T BE FOUND ###
-url1 = 'https://raw.githubusercontent.com/snorreralund/sds_dump/w2vec_dimensionality_reduction.npy'
+url1 = 'https://raw.githubusercontent.com/snorreralund/sds_dump/master/w2vec_dimensionality_reduction.npy'
 response1 = requests.get(url1)
 response1
 type(response1)
 w2vec_file = np.load(response1)
 
-url2 = 'https://raw.githubusercontent.com/snorreralund/sds_dump/tfidf_dimensionality_reduction.npy'
+url2 = 'https://raw.githubusercontent.com/snorreralund/sds_dump/master/tfidf_dimensionality_reduction.npy'
 response2 = requests.get(url2)
 response2
 tfidf_file = np.load(response2)
