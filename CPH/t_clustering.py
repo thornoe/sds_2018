@@ -99,14 +99,15 @@ ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', hue_order=['Lo
 ax = ax1, ax2
 fig.savefig("CPH/Fig/cluster.pdf", dpi=600, bbox_inches='tight')
 
-XD['Cluster'].value_counts(normalize=True)
+print('Share in each cluster:', '\n', XD['Cluster'].value_counts(normalize=True))
 
+# Descriptive statistics
 data_0 = XD['Sqm_price'].loc[XD['Cluster'] == 'Low']
-data_1 = data_0.describe([.05, .5, .95])
+data_1 = data_0.describe([.025, .5, .975])
 data_0 = XD['Sqm_price'].loc[XD['Cluster'] == 'Middle']
-data_2 = data_0.describe([.05, .5, .95])
+data_2 = data_0.describe([.025, .5, .975])
 data_0 = XD['Sqm_price'].loc[XD['Cluster'] == 'High']
-data_3 = data_0.describe([.05, .5, .95])
+data_3 = data_0.describe([.025, .5, .975])
 CPH_desc = pd.DataFrame(data_1)
 CPH_desc.columns = ['Low']
 CPH_desc.insert(loc=1, column='Middle', value=data_2)
@@ -114,8 +115,8 @@ CPH_desc.insert(loc=2, column='High', value=data_3)
 # CPH_desc = CPH_desc.round(decimals=0)
 CPH_desc = CPH_desc.astype(int)
 descriptives = CPH_desc.transpose()
+print('Descriptive statistics for each cluster:', '\n', CPH_desc)
 descriptives.to_latex()  # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_latex.html
-CPH_desc
 
 ### Number of iterations for different seed numbers
 # no_iterations = []
@@ -131,13 +132,13 @@ CPH_desc
 ##########################################################################
 #        Clusters in Greater Copenhagen - log yearly sqm expenses        #
 ##########################################################################
-Z = cph.loc[:,['Latitude', 'Longitude', 'log_yearly_sqm_exp']].values  # Define a matrix using the .values method
+Z = cph.loc[:,['Latitude', 'Longitude', 'log_sqm_yearly_exp']].values  # Define a matrix using the .values method
 seed = 2900
 max_iter = 100  # maximum number of iterations
 k = 3  # number of clusters
-cluster_assignment, centroids = fit_transform(Z, k, max_iter, seed)  # Set the number of clusters
+cluster_assignment, centroids, iterations = fit_transform(Z, k, max_iter, seed)  # Set the number of clusters
 
-ZD = cph.reindex(columns = ['Latitude', 'Longitude', 'log_yearly_sqm_exp', 'Yearly_expenses'])
+ZD = cph.reindex(columns = ['Latitude', 'Longitude', 'log_sqm_yearly_exp', 'Yearly_expenses'])
 ZD.insert(loc=3, column='Cluster', value=cluster_assignment)
 ZD['Cluster'] = ZD['Cluster'].astype('category')
 # ZD['Cluster'].dtype
@@ -145,7 +146,7 @@ ZD['Cluster'] = ZD['Cluster'].cat.rename_categories(['High', 'Middle', 'Low'])  
 ZD['Cluster'].cat.categories
 
 centroids = pd.DataFrame(centroids)
-centroids.columns = ['Latitude', 'Longitude', 'log_yearly_sqm_exp']
+centroids.columns = ['Latitude', 'Longitude', 'log_sqm_yearly_exp']
 cluster = ['High', 'Middle', 'Low']
 centroids.insert(loc=3, column='Cluster', value=cluster)
 
@@ -153,24 +154,23 @@ centroids.insert(loc=3, column='Cluster', value=cluster)
 sns.set(style='ticks')
 fig, ax = plt.subplots(figsize = (15, 15*0.87))
 ax1 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', hue_order=['Low', 'Middle', 'High'],
-    size = 'log_yearly_sqm_exp', sizes=(1,300), palette="Paired", legend='brief', data=ZD, alpha=0.4)
+    size = 'log_sqm_yearly_exp', sizes=(1,300), palette="Paired", legend='brief', data=ZD, alpha=0.4)
 ax2 = sns.scatterplot(x='Longitude', y='Latitude', hue='Cluster', hue_order=['Low', 'Middle', 'High'],
-    size = 'log_yearly_sqm_exp', sizes=(800,1200), palette="Paired", legend=False, data=Zcentroids, marker='X', alpha=0.9)
+    size = 'log_sqm_yearly_exp', sizes=(800,1200), palette="Paired", legend=False, data=centroids, marker='X', alpha=0.9)
 ax = ax1, ax2
 # fig.savefig("CPH/Fig/cluster_yearlyexpenses.pdf", dpi=600, bbox_inches='tight')
 
-ZD['Cluster'].value_counts(normalize=True)
-
 ZD['Differences'] = np.where(XD['Cluster'] != ZD['Cluster'], ZD['Cluster'], np.nan)
-XD['Cluster'].value_counts(normalize=True)
-ZD['Cluster'].value_counts(normalize=True)
-ZD['Differences'].value_counts(normalize=False)
-(311+109+32)/len(ZD)  # 11.4 pct. belongs to a different cluster
 
-# cph.loc[:, ['log_sqm_price', 'Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses', 'log_yearly_sqm_exp']].head()
-cph.loc[:, ['log_sqm_price', 'Sqm_price', 'Price', 'Owner_expense', 'Yearly_expenses', 'First_year_expenses', 'log_yearly_sqm_exp']].describe(percentiles = [.25, .5, .75])
-0.282/10.641  # standard deviation for log_sqm_price
-0.2183/7.5618 # std.dev. a little higher for log_yearly_sqm_exp
+print('Cluster distribution using apartment price per square meter:', '\n',
+    XD['Cluster'].value_counts(normalize=True),
+    '\nCluster distribution using total yearly expenses per square meter:', '\n',
+    ZD['Cluster'].value_counts(normalize=True),
+    "\nNew 'entrances' in each cluster:", '\n',
+    ZD['Differences'].value_counts(normalize=False),
+    '\nShare that change cluster:', '\n',
+    (311+109+32)/len(ZD) ) # 11.4 pct. belongs to a different cluster
+
 # ZD['Yearly_expenses'].loc[ZD['Cluster'] == 'Low'].describe([.05, .5, .95])
 # ZD['Yearly_expenses'].loc[ZD['Cluster'] == 'Middle'].describe([.05, .5, .95])
 # ZD['Yearly_expenses'].loc[ZD['Cluster'] == 'High'].describe([.05, .5, .95])
