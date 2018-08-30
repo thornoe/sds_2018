@@ -33,18 +33,20 @@ cph.to_csv('CPH/Data/cph.csv', index=False)  # Save scraped data
 cph = pd.read_csv('CPH/Data/cph.csv')
 
 # Take subset of table for descriptive statistics.
-vars_ = ['Price', 'Sqm_price' , 'Owner_expense', 'Yearly_expenses', 'Floor', 'Rooms',
-    'Area','Energy_saving', 'Days_on_market', 'School_dist', 'Metro_dist', 'Jail_dist']
+vars_ = ['Price', 'Owner_expense', 'Yearly_expenses', 'Sqm_price' , 'Sqm_owner_expenses', 'Sqm_yearly_expenses']
 data_0 = cph.loc[:, vars_]
 data_1 = data_0.describe()
 # Round of decimal points and choose descriptives of interest.
-CPH_desc = CPH_desc.astype(int)
+cph_desc = data_1.astype(int)
 cph_desc = cph_desc.iloc[[1,2,3,5,7],:]
 descriptives = cph_desc.transpose()
-descriptives.to_latex()
-# Få tabel i LaTeX format:
-#descritives.to_latex() #https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_latex.html
+print(descriptives)
+descriptives.to_latex()  # Få tabel i LaTeX format:
 
+# t-values of sqm_measures:
+# 12069/43466  # sqm_price
+# 9/41  # sqm_owner_expenses
+# 429/1969  # sqm_yearly_expenses
 ##############################################################################
 #              Implementing the K-means Clustering algorithm                 #
 ##############################################################################
