@@ -183,13 +183,16 @@ def datastructuring(data, timeout):
     # Sort columns in order which makes sence
     cph_kom =cph_merged.reindex(columns=['Address', 'Zip_code', 'Municipality',
         'Latitude', 'Longitude', 'Floor', 'Rooms', 'Area', 'Land_area',
-        'Sqm_price', 'Price', 'Owner_expense', 'Price_development',
+        'Price', 'Sqm_price', 'Price_development', 'Owner_expense',
         'Energy_saving', 'Days_on_market'])
 
     # Create log variable of square meter price
-    cph_kom.insert(loc=9, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
+    cph_kom.insert(loc=11, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
 
-    # Standard-Finance
+    # Owner expenses pr. square meter
+    cph_kom.insert(loc=14, column='Sqm_owner_expenses', value=np.divide(cph_kom.Owner_expense, cph_kom.Area))
+
+    # Standard-Finance (total yearly expenses)
     yearly_expenses = []
     first_year_expenses = []
     for houseprice, ownerexp in zip(cph_kom.Price, cph_kom.Owner_expense):
@@ -205,11 +208,12 @@ def datastructuring(data, timeout):
         Bankloan = (houseprice*0.2 - Cashticket)*0.066  # De resterende ca. 15% lånes i banken til en ÅOP på 6.6% efter skat banklånet
         yearly_expenses.append(12*ownerexp + Bankloan + Mortgage)
         first_year_expenses.append(12*ownerexp + Bankloan + Mortgage + Cashticket)
-    cph_kom.insert(loc=13, column='Yearly_expenses', value=yearly_expenses)
-    cph_kom.insert(loc=14, column='First_year_expenses', value=first_year_expenses)
+    cph_kom.insert(loc=15, column='Yearly_expenses', value=yearly_expenses)
+    cph_kom.insert(loc=16, column='First_year_expenses', value=first_year_expenses)
     yearly_sqm_exp = (cph_kom.Yearly_expenses / cph_kom.Area)
-    cph_kom.insert(loc=15, column='Yearly_sqm_exp', value=(yearly_sqm_exp))
-    cph_kom.insert(loc=16, column='log_yearly_sqm_exp', value=np.log(yearly_sqm_exp))
+    cph_kom.insert(loc=17, column='Sqm_yearly_exp', value=(yearly_sqm_exp))
+    cph_kom.insert(loc=18, column='log_yearly_sqm_exp', value=np.log(yearly_sqm_exp))
+
     print(cph_kom.isnull().sum())
 
     return cph_kom
