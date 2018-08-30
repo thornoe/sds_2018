@@ -180,12 +180,19 @@ def datastructuring(data, timeout):
     # Now merge datasets on zip code:
     cph_merged= pd.merge(cph, our_sample, on='Zip_code', how='left')
 
-    # Sort columns in order which makes sence
+
+    ##########################################################################
+    #                 Sort columns in order which makes sence                #
+    ##########################################################################
     cph_kom =cph_merged.reindex(columns=['Address', 'Zip_code', 'Municipality',
         'Latitude', 'Longitude', 'Floor', 'Rooms', 'Area', 'Land_area',
         'Price', 'Sqm_price', 'Price_development', 'Owner_expense',
         'Energy_saving', 'Days_on_market'])
 
+
+    ##########################################################################
+    #                   Other measures of (total) expenses                   #
+    ##########################################################################
     # Create log variable of square meter price
     cph_kom.insert(loc=11, column='log_sqm_price', value=np.log(cph_kom.Sqm_price))
 
