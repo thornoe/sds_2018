@@ -9,6 +9,7 @@ import pandas as pd
 import time, tqdm
 import geopy.geocoders  # GeoPy - see https://pypi.org/project/geopy/
 from geopy.geocoders import Nominatim # retrieve coordinates from addresses etc.
+
 geopy.geocoders.options.default_user_agent = 'my_app/1'
 geopy.geocoders.options.default_timeout = timeout
 
@@ -71,9 +72,9 @@ for i, row in cph['Energy_mark'].iteritems():
     else:
         energysaving.append(None)
 cph.insert(loc=0, column='Energy_saving', value=energysaving)
-
+cph.isnull().sum()
 # Set all missing values with energy_saving to mean.
-cph.Energy_saving.fillna(4.0, inplace=True)
+cph.Energy_saving.fillna(4.0, inplace=True)  # impute mean to 424 observations (11 pct.)
 
 # Create 'floor' variable
 floor = []
