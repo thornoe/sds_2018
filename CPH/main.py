@@ -62,10 +62,7 @@ cph.isnull().sum()
 ##############################################################################
 #                            Dropping extremes                               #
 ##############################################################################
-cph = pd.read_csv('CPH/Data/data_apar.csv')
-cph = cph.sort_values(by=['Sqm_price'])
-cph = cph.iloc[25:-26]
-cph['Sqm_price'].head()
-cph.to_csv('CPH/Data/no_extremes.csv', index=False)  # Save scraped data
-
-data_apar = pd.read_csv('CPH/Data/no_extremes.csv')
+data_apart = pd.read_csv('CPH/Data/data_apar.csv')
+data_no_extremes = data_apart.sort_values(by=['Sqm_price']).copy()
+data_no_extremes = data_no_extremes.iloc[25:-25]
+data_no_extremes.sort_index(inplace=True)
