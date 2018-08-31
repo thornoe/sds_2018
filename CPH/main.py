@@ -68,4 +68,4 @@ cph = cph.iloc[25:-26]
 cph['Sqm_price'].head()
 cph.to_csv('CPH/Data/no_extremes.csv', index=False)  # Save scraped data
 
-cph = pd.read_csv('CPH/Data/cph.csv')
+data_apar = pd.read_csv('CPH/Data/no_extremes.csv')
