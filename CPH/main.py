@@ -1,7 +1,7 @@
 # [Install packages]
 !pip3 install tqdm
 !pip3 install geopy
-!pip3 install geopandas
+!conda install geopandas
 
 # [Import packages]
 import numpy as np
@@ -52,3 +52,20 @@ descriptives.to_latex()  # Få tabel i LaTeX format:
 ##############################################################################
 cph = pd.read_csv('CPH/Data/cph.csv')
 cph.isnull().sum()
+
+##############################################################################
+#                            Machine learning                                #
+##############################################################################
+
+
+
+##############################################################################
+#                            Dropping extremes                               #
+##############################################################################
+cph = pd.read_csv('CPH/Data/data_apar.csv')
+cph = cph.sort_values(by=['Sqm_price'])
+cph = cph.iloc[25:-26]
+cph['Sqm_price'].head()
+cph.to_csv('CPH/Data/no_extremes.csv', index=False)  # Save scraped data
+
+cph = pd.read_csv('CPH/Data/cph.csv')
