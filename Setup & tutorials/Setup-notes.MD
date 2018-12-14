@@ -16,7 +16,15 @@ Pre-installed Spell-check package
 -   Add the following line to "Excluded Scopes":
     support.function.tex, support.function.textit.latex, support.function.textbf.latex
 -   Add "en-US, da-DK, es-ES" or others under locales (check "Use Locales").
-  Check that English (United States) etc. is installed in Windows language settings.
+-   Language:
+    - Check that English (United States) is installed in Windows language settings.
+    - For now you need to set the system language to English (USA) as well for spell-check to work
+
+## Ide (instead of Linter)
+-   atom-ide-ui
+-   platformio-ide terminal
+-   ide-python
+-   ide-r
 
 ## Linter
 -   linter-pydocstyle & flake8 for Python (Ignore Error Codes: D100, E266, E305, W391 in flake8)
