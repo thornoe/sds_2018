@@ -5,4 +5,4 @@ Social Data Science 2018, course on University of Copenhagen, Department of Econ
 -  See [abjer/sds](https://github.com/abjer/sds) for the public course material.
 
 ## Getting started with Atom
--  See [/Setup & tutorials/Setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup%20%26%20tutorials/Setup-notes.MD) for an overview of my setup.
+-  See [Setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup%20%26%20tutorials/Setup-notes.MD) for an overview of how I have set up Atom for use with Python and LaTeX.
