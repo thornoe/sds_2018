@@ -1,7 +1,7 @@
 ## Social Data Science 2018
 Summer school course on University of Copenhagen, Department of Economics.
 -  See [our paper](https://github.com/thornoe/sds_2018/blob/master/CPH/Predicting%20apartment%20prices%20in%20the%20urban%20area%20of%20Copenhagen.pdf) "Predicting apartment prices in the urban area of Copenhagen: A machine learning approach".
--  See the [Jupyter Notebook](https://github.com/thornoe/sds_2018/blob/master/CPH/Notebook_final.ipynb) for Python code on using machine learning to predict housing prices.
+-  See the [Jupyter Notebook](https://github.com/thornoe/sds_2018/blob/master/CPH/Notebook_final.ipynb) for Python code for using machine learning to predict housing prices.
 -  See [abjer/sds](https://github.com/abjer/sds) for the public course material.
 
 ## Getting started with Atom
