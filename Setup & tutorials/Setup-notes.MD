@@ -1,5 +1,6 @@
 ## General installation of Atom:
--   ATOM packages: script, pdf-view, language-latex, hydrogen-launcher, file-icons, atom-latex
+-   <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
+-   General Atom packages: script, pdf-view, language-latex, hydrogen-launcher, file-icons, atom-latex
 
 ## LaTex
 -   TeXLive works with atom-latex, MiKTeX does not!
@@ -16,13 +17,14 @@
 
 ## Spell-check:
 Pre-installed Spell-check package
--   Add text.tex.latex to "Grammars"
+-   Add text.tex.latex, text.tex.latex.beamer to "Grammars"
+    - Find out what scope to add for a current file: put the cursor in the file, open the Command Palette (ctrl-shift-p), and run the  Editor: Log Cursor Scope command.
 -   Add the following line to "Excluded Scopes":
-    - support.function.tex, support.function.textit.latex, support.function.textbf.latex
+    - support.function.tex, support.function.latex, meta.preamble.latex, support.type.function.latex, comment.line.percentage.tex, storage.type.function.latex, string.other.math.tex, string.other.math.block.environment.latex, variable.parameter.function.latex, constant.other.reference.latex
 -   Add "en-US, da-DK, es-ES" or others under locales (check "Use Locales").
 -   Windows Language (equivalently for Linux):
     - Check that English (United States) is installed in Windows language settings.
-    - For now you need to set the system language to English (USA) as well for spell-check to work
+    - For now you need to set the system language to English (United States) as well for spell-check to work.
 
 ## Ide (instead of Linter)
 -   atom-ide-ui
