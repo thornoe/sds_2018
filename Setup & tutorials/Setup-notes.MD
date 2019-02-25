@@ -24,17 +24,21 @@ Pre-installed Spell-check package
     - To find out what scope to add for a current file: put the cursor in the file, open the Command Palette `ctrl-shift-p`, and search for the `Editor: Log Cursor Scope` command.
 -   Add the following line to "Excluded Scopes":
     - `Support.function.tex, support.function.latex, meta.preamble.latex, support.type.function.latex, comment.line.percentage.tex, storage.type.function.latex, string.other.math.tex, string.other.math.block.environment.latex, variable.parameter.function.latex, constant.other.reference.latex`
--   Add `en-US, da-DK, es-ES` or others under locales (check "Use Locales").
+-   Add `en-US, da-DK, es-ES` or others under locales (check the "Use Locales" box).
 -   Windows Language (equivalently for Linux):
     - Check that `English (United States)` is installed in Windows language settings.
     - For now you need to set the system language to `English (United States)` as well for spell-check to work.
+-   Place the cursor at a highligted word and press `ctrl+shift+:` to run spell-check
 
 ## Ide
 Used for language support instead of Linter. Run `apm install ...` in Command Prompt
--   atom-ide-ui
--   ide-python
--   ide-r
--   platformio-ide-terminal (optional terminal package for atom)
+-   `atom-ide-ui`
+-   `ide-python`
+    <!-- - I add the errors ` , ` under Settings > PyCodeStyle > Ignore -->
+    - Automatically changes tab-length to 4 spaces for all .py files
+-   `ide-r`
+-   `atom-ide-debugger-python`(optional debugger)
+-   `platformio-ide-terminal` (optional terminal package for atom)
 
 ## Linter
 Common package for language support but suboptimal for Python & R
