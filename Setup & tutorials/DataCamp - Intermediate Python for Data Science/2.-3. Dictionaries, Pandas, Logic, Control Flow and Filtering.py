@@ -48,9 +48,8 @@ import numpy as np
         print(car_maniac)
 
 # Boolean operators
-    and
-    or
-    not
+    not(False == 1) and np.sqrt(3) != 1.7
+    np.pi == 3.1427 or type(np.pi) == float
 
 # Boolean operatos with NumPy
     # Ex.3.a
@@ -67,6 +66,9 @@ import numpy as np
         cpc = cars['cars_per_cap']
         between = np.logical_and(cpc > 100, cpc < 500)
         medium = cars[between]
+        medium  # df of countries with a medium-sized car-pool
+        right = cars[cars['drives_right']]
+        right  # df of countries with right-side-driving
 
 # Conditional statements
     if
@@ -74,10 +76,10 @@ import numpy as np
     else
 
     # Ex. 3 if-elif-else construct for area
-        area = 14.0
-    if area > 15 :
+    area = 14.0
+    if area > 15:
         print("big place!")
-    elif area > 10 :
+    elif area > 10:
         print("medium size, nice!")
-    else :
+    else:
         print("pretty small.")
