@@ -5,4 +5,4 @@ Summer school course on University of Copenhagen, Department of Economics.
 -  See [abjer/sds](https://github.com/abjer/sds) for the public course material.
 
 ## Getting started with Atom
--  See [setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup%20%26%20tutorials/Setup-notes.MD) for an overview of how I have set up Atom for use with Python and LaTeX.
+-  See [setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup/Setup-notes.MD) for an overview of how I have set up Atom for use with Python and LaTeX.
