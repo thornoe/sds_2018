@@ -18,7 +18,7 @@
 -   In the terminal run `apm install hydrogen`
 -   All you need is Script, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages)
 -   Install the Python language server (pyls) by running `pip3 install --user python-language-server` in the terminal
--   Update Python once in a while `conda update --all`
+-   Update Python once in a while `conda update --all` (and the [hack](https://pypi.org/project/pip-upgrade-outdated/) `pip_upgrade_outdated`).
 
 ## R
 -   R is installed from the R website, and Rstudio from the Rstudio website (If you install IRkernel (google it) you can run R in atom through hydrogen)
