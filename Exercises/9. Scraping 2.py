@@ -23,7 +23,7 @@ plt.style.use('seaborn-white')
 #              Interactions and Automated Browsing            #
 ###############################################################
 # Sometimes scraping tasks demand interactions (e.g. login, scrolling, clicking),
-#  and a no XHR data can be found easily, so you need the browser to execute
+#  and no XHR/JSON data can be found easily, so you need the browser to execute
 #  the scripts before you can get the data.
 # Dowlnoad the latest release, and installing the latest selenium version.
 # pip3 install selenium --upgrade

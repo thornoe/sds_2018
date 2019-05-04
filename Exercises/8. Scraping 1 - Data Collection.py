@@ -52,7 +52,7 @@ plt.style.use('seaborn-white')
 #    Collecting data on display - lets you choose between tables directly     #
 ###############################################################################
 ## Basic examples
-url = 'https://www.basketball-reference.com/leagues/NBA_2018.html'  # link to the website
+url = 'https://www.basketball-reference.com/leagues/NBA_2018.html' # link to the website
 dfs = pd.read_html(url)  # parses all tables found on the page.
 len(dfs)  # number of tables
 dfs[0]  # showing 1st table
@@ -65,10 +65,17 @@ EC_df = pd.read_html(url,attrs={'id':'confs_standings_E'})  # only parse the tab
 #############################################
 #   Collecting datas BEHIND the display     #
 #############################################
-# right-click to "Inspect element"
+"""
+Open (or install) Firefox, right-click on a graphic to "Inspect element".
+Go to "Network" banner, choose XHR, update (F5) and look for JSON files.
+- Go through the JSON files that are not 3rd part (advertisement).
+- In the panel in the bottom right first look under "Response" for the data
+- When the desired JSON-file is found, go to "Headers" for the "Request-URL"
+"""
+
 url = 'https://graphs2.coinmarketcap.com/currencies/bitcoin/'
 # response = requests.get(url)
-resonse = get(url)  # self defined function
+response = get(url)  # self defined function
 response.ok
 response.text
 d = requests.get(url).json()
