@@ -8,4 +8,4 @@ Summer school course on University of Copenhagen, Department of Economics.
 -  See [setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup/Setup-notes.MD) for an overview of how I set up Atom for use with Python, LaTeX, and potentially R.
 
 ## Further learning
-Advanced course on (Topics in Social Data Science)[https://github.com/thornoe/topics_in_social_data_science].
+Advanced course on [Topics in Social Data Science](https://github.com/thornoe/topics_in_social_data_science).
