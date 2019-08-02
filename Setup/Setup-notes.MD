@@ -39,7 +39,7 @@ Pre-installed Spell-check package
 
 ## Ide
 Used for language support instead of Linter. Install the following Atom packages
--   `atom-ide-ui` (under 'Settings' > 'Enabled Features' I choose to disable 'Console', 'Debugger', 'atom-ide-refactor', & 'Terminal')
+-   `atom-ide-ui` (under 'Settings' > 'Enabled Features' I choose to disable 'Console', 'Debugger', 'atom-ide-refactor', and 'Terminal')
 -   `ide-python`
     - I add the [error codes](http://pycodestyle.pycqa.org/en/latest/intro.html#error-codes) `E2, E3, E501, W2, W3, W5` under 'Settings' > 'PyCodeStyle' > 'Ignore'
     - Automatically changes tab-length to 4 spaces for all .py files (overwrites global Atom settings)
