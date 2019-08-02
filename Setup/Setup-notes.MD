@@ -34,7 +34,7 @@ Pre-installed Spell-check package
 -   Add `en-US`, `da-DK`, `es-ES` or others under 'Locales' (check the 'Use Locales' box).
 -   Windows Language (equivalently for Linux):
     - For now you need to set the system language to `English (United States)` for spell-check to work.
-    - Once a certain bug fix is approved you'll only need to make sure that `English (United States)` is installed in Windows language settings.
+    - When a certain bug fix is approved you'll only need to make sure that `English (United States)` is installed in Windows language settings.
 -   Place the cursor at a highlighted word and press `ctrl+shift+:` to run spell-check
 
 ## Ide
