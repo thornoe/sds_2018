@@ -16,7 +16,7 @@
 ## Python
 -   Python is installed by installing [Anaconda](https://www.anaconda.com/distribution/#download-section) (choose 'Add Anaconda to my PATH environment variable'), and running it through hydrogen in atom.
 -   In the terminal run `apm install hydrogen`
--   All you need is Script, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages) (however, I recommend using ide instead of `linter-pydocstyle` & `flake8`, see below).
+-   All you need is Script, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages) (ignore `linter-pydocstyle` & `flake8` but see IDE below instead).
 -   Install the Python language server (pyls) by running `pip3 install --user python-language-server` in the terminal
 -   Update Python once in a while `conda update --all` (and the [hack](https://pypi.org/project/pip-upgrade-outdated/) `pip_upgrade_outdated -3`).
 
@@ -37,8 +37,8 @@ Pre-installed Spell-check package
     - When a certain bug fix is approved you'll only need to make sure that `English (United States)` is installed in Windows language settings.
 -   Place the cursor at a highlighted word and press `ctrl+shift+:` to run spell-check
 
-## Ide
-Used for language support instead of Linter. Install the following Atom packages
+## IDE
+Used for language support instead of Linter due to better functionality with Python and R. Install the following Atom packages
 -   `atom-ide-ui` (Under 'Settings' > 'Enabled Features' I choose to disable 'Console', 'Debugger', 'atom-ide-refactor', and 'Terminal')
 -   `ide-python`
     - I add the [error codes](http://pycodestyle.pycqa.org/en/latest/intro.html#error-codes) `E2, E3, E501, W2, W3, W5` under 'Settings' > 'PyCodeStyle' > 'Ignore'
@@ -48,7 +48,7 @@ Used for language support instead of Linter. Install the following Atom packages
 -   `platformio-ide-terminal` (optional terminal package for atom)
 
 ## Linter
-Common package for language support but suboptimal for Python and R, thus, I recommend using Ide instead.
+Common package for language support but suboptimal for Python and R, thus, I recommend using IDE instead.
 -   However, if you prefer Linter (e.g. if you only use Atom for LaTeX and Markdown) you can install the package `linter` and the relevant [language specific linter packages](https://atomlinter.github.io/), e.g.
     - `linter-markdown`
     - `linter-ui-default` & `linter-chktex` for LaTeX
