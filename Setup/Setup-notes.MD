@@ -48,7 +48,7 @@ Used for language support instead of Linter. Install the following Atom packages
 -   `platformio-ide-terminal` (optional terminal package for atom)
 
 ## Linter
-Common package for language support but suboptimal for Python & R, thus, I recommend using Ide instead.
+Common package for language support but suboptimal for Python and R, thus, I recommend using Ide instead.
 -   If you prefer Linter, however, you can install the package `linter` and the relevant [language specific linter packages](https://atomlinter.github.io/), e.g.
     - `linter-markdown`
     - `linter-ui-default` & `linter-chktex` for LaTeX
