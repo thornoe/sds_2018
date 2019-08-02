@@ -49,7 +49,7 @@ Used for language support instead of Linter. Install the following Atom packages
 
 ## Linter
 Common package for language support but suboptimal for Python and R, thus, I recommend using Ide instead.
--   If you prefer Linter, however, you can install the package `linter` and the relevant [language specific linter packages](https://atomlinter.github.io/), e.g.
+-   However, if you prefer Linter (e.g. if you only use Atom for LaTeX and Markdown) you can install the package `linter` and the relevant [language specific linter packages](https://atomlinter.github.io/), e.g.
     - `linter-markdown`
     - `linter-ui-default` & `linter-chktex` for LaTeX
     - `linter-pydocstyle` & `flake8` for Python (Ignore Error Codes: D100, E266, E305, W391 in flake8)
