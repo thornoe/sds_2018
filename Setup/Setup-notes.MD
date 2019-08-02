@@ -14,7 +14,7 @@
 -   `markdown-preview` is pre-installed. Press `ctrl+shift+m` to toogle on/off.
 
 ## Python
--   Python is installed by installing Anaconda (choose 'Add Anaconda to my PATH environment variable'), and running it through hydrogen in atom.
+-   Python is installed by installing [Anaconda](https://www.anaconda.com/distribution/#download-section) (choose 'Add Anaconda to my PATH environment variable'), and running it through hydrogen in atom.
 -   In the terminal run `apm install hydrogen`
 -   All you need is Script, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages) (however, I recommend using ide instead of `linter-pydocstyle` & `flake8`, see below).
 -   Install the Python language server (pyls) by running `pip3 install --user python-language-server` in the terminal
