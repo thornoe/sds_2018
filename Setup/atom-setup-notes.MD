@@ -1,3 +1,4 @@
+# Atom setup notes
 [Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface.
 
 However, it requires quite some setup, fine-tuning, and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that Atom is the right choice for for your needs by reading a few comparisons with other text editors, e.g.
