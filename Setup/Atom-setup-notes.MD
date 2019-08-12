@@ -1,36 +1,37 @@
 # Atom setup notes
 [Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface.
 
-However, it requires quite some setup, fine-tuning, and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that Atom is the right choice for for your needs by reading a few comparisons with other text editors, e.g.
-1.   [Sublime Text](https://www.sublimetext.com/) the oldest and most common of the text editors but has poor word-suggestions.
-2.   [Visual Studio](https://visualstudio.microsoft.com/) by Microsoft. One pro is that it allows you to edit Jupyter Notebooks outside of your browser.
-Compared to the two above, Atom is a bit slower but offers better functionality with GitHub when collaborating on a project.
+However, Atom requires quite some setup, fine-tuning, and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that it is the right choice for for your needs by reading a few comparisons with other text editors, e.g.
+1.   [Sublime Text](https://www.sublimetext.com/) the oldest and most common of the text editors but has poor word-suggestions and updates are infrequent due to not being open source
+2.   [Visual Studio](https://visualstudio.microsoft.com/) by Microsoft. One of many pros is that it allows you to edit Jupyter Notebooks outside of your browser
+Compared to the two above, Atom can have slower performance but offers better functionality with GitHub when collaborating on a project.
 
 ## General installation of Atom:
 -   Follow the installation guide <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
 -   To install Atom packages either
     1. Press `ctrl+,` in Atom and search for packages under 'install'
-    2. Or open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install script`. The first time run `apm` to check apm is installed correctly
--   Always install the following Atom packages by running the command:
-    ```
-    apm install script hydrogen-launcher file-icons pdf-view atom-latex language-latex
-    ```
+    2. Or open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install file-icons`. The first time run `apm` to check apm is installed correctly
 
 ## LaTeX
 -   TeXLive works with atom-latex, MiKTeX does not!
+-   Always install the following Atom packages by running the command:
+    ```
+    apm install pdf-view atom-latex language-latex
+    ```
 -   Check the [optional packages listed by Benjamin Gray](https://gist.github.com/Aerijo/5b9522530715e5be6e89fc012e9a72a8) (ignore the Linter-packages and see 'Ide' below instead)
 
 ## Markdown
 -   Install `language-markdown` and `markdown-writer`
--   `markdown-preview` is pre-installed. Press `ctrl+shift+m` to toogle on/off.
+-   `markdown-preview` is pre-installed. Press `ctrl+shift+m` to toogle on/off
 -   If you're new to Markdown language, check this [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-
+apm install script 
 ## Python
--   Python is installed by installing [Anaconda](https://www.anaconda.com/distribution/#download-section) (choose 'Add Anaconda to my PATH environment variable'), and running it through hydrogen in atom.
--   In the terminal run `apm install hydrogen`
--   All you need is Script, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages) (ignore `linter-pydocstyle` & `flake8` but see IDE below instead).
--   Install the Python language server (pyls) by running `pip3 install --user python-language-server` in the terminal
--   Update Python once in a while `conda update --all` (and the [hack](https://pypi.org/project/pip-upgrade-outdated/) `pip_upgrade_outdated -3`).
+-   Python is installed by installing [Anaconda](https://www.anaconda.com/distribution/#download-section) (choose 'Add Anaconda to my PATH environment variable'), and running it through the Hydrogen package in Atom
+-   In the terminal run `apm install hydrogen hydrogen-launcher script`
+-   All you need is the Script package, but consider optional packages from the [list at pythonmania](https://www.pythonmania.net/en/2017/02/27/recommended-atom-packages) (ignore `linter-pydocstyle` & `flake8` but see IDE below instead)
+-   Install the Python language server (pyls) by running `pip
+install --user python-language-server` in the terminal
+-   Update Python once in a while by running `conda update --all` and `pip_upgrade_outdated` (install the [hack](https://pypi.org/project/pip-upgrade-outdated/) first)
 
 ## R
 -   R is installed from the R website, and Rstudio from the Rstudio website (If you install IRkernel (google it) you can run R in atom through hydrogen)
