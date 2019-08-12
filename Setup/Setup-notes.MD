@@ -1,5 +1,5 @@
 ## General installation of Atom:
--   <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
+-   Follow the installation guide <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
 -   To install Atom packages either
     - Press `ctrl+,` in Atom and search for packages under 'install'
     - Open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install script`. The first time run `apm` to check apm is installed correctly.
