@@ -1,8 +1,8 @@
 # Atom setup notes
 [Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface.
 
-However, Atom requires quite some setup, fine-tuning, and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that it is the right choice for for your needs by reading a few comparisons with other text editors, e.g.
-1.   [Sublime Text](https://www.sublimetext.com/) the oldest and most common of the text editors but has poor word-suggestions and updates are infrequent due to not being open source
+However, it requires quite some setup, fine-tuning, trouble-shooting and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that Atom is the right choice for your needs by reading a few comparisons with other alternatives, e.g.
+1.   [Sublime Text](https://www.sublimetext.com/) is the oldest and most common of the text editors but has poor word-suggestions and updates are infrequent due to not being open source
 2.   [Visual Studio](https://visualstudio.microsoft.com/) by Microsoft. One of many pros is that it allows you to edit Jupyter Notebooks outside of your browser
 Compared to the two above, Atom can have slower performance but offers better functionality with GitHub when collaborating on a project.
 
