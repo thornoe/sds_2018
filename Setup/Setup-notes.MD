@@ -1,12 +1,15 @@
 [Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface.
 
-However, it requires quite some setup and fine-tuning to get the full functionality as compared to e.g. [Sublime](https://www.sublimetext.com/).
+However, it requires quite some setup, fine-tuning, and practice before you are able to enjoy its full functionality. Thus, before comitting make sure that Atom is the right choice for for your needs by reading a few comparisons with other text editors, e.g.
+1.   [Sublime Text](https://www.sublimetext.com/) has been a common and popular text editor since the first version in 2007.
+2.   [Visual Studio](https://visualstudio.microsoft.com/) by Microsoft. A nice virtue is that it allows you to edit Jupyter Notebooks outside of your browser.
+-   Compared to the two above Atom is a bit slower but offers better functionality with GitHub when collaborating on a project.
 
 ## General installation of Atom:
 -   Follow the installation guide <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
 -   To install Atom packages either
-    - Press `ctrl+,` in Atom and search for packages under 'install'
-    - Or open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install script`. The first time run `apm` to check apm is installed correctly
+    a. Press `ctrl+,` in Atom and search for packages under 'install'
+    b. Or open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install script`. The first time run `apm` to check apm is installed correctly
 -   Always install the following Atom packages by running the command:
     ```
     apm install script hydrogen-launcher file-icons pdf-view atom-latex language-latex
