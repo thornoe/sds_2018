@@ -15,6 +15,7 @@
 ## Markdown
 -   Install `language-markdown` and `markdown-writer`
 -   `markdown-preview` is pre-installed. Press `ctrl+shift+m` to toogle on/off.
+-   If you're new to Markdown language, check this [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
 ## Python
 -   Python is installed by installing [Anaconda](https://www.anaconda.com/distribution/#download-section) (choose 'Add Anaconda to my PATH environment variable'), and running it through hydrogen in atom.
