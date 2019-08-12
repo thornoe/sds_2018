@@ -1,4 +1,6 @@
-[Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface. However, it requires quite some setup and fine-tuning to get the full functionality as compared to e.g. [Sublime](https://www.sublimetext.com/).
+[Atom](https://atom.io/) (developed by GitHub) is a great solution for handling program languages like LaTeX, Markdown, Python, and R in a single text editor with a smooth user interface.
+
+However, it requires quite some setup and fine-tuning to get the full functionality as compared to e.g. [Sublime](https://www.sublimetext.com/).
 
 ## General installation of Atom:
 -   Follow the installation guide <https://flight-manual.atom.io/getting-started/sections/installing-atom/>
