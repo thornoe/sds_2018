@@ -5,7 +5,7 @@ Summer school course on University of Copenhagen, Department of Economics.
 -  See [abjer/sds](https://github.com/abjer/sds) for the public course material.
 
 ## Getting started with Atom
--  See [atom-setup-notes](https://github.com/thornoe/sds_2018/blob/master/Setup/Atom-setup-notes.MD) for an overview of how I set up Atom for use with Python, LaTeX, and potentially R.
+-  See my [Atom setup notes](https://github.com/thornoe/sds_2018/blob/master/Setup/Atom-setup-notes.MD) for an overview of how I set up Atom for use with LaTeX, Markdown, Python, and R.
 
 ## Further learning
 Advanced course on [Topics in Social Data Science](https://github.com/thornoe/topics_in_social_data_science).
