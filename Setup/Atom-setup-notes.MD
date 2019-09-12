@@ -12,7 +12,7 @@ Compared to the two above, Atom can have slower performance but offers better fu
 -   To install Atom packages either
     1. Press `ctrl+,` in Atom and search for packages under 'install'
     2. Or open the terminal (e.g. Command Prompt in Windows) and run a command like `apm install file-icons`. The first time run `apm` to check apm is installed correctly
--   The choice of UI Themes and Syntax Theme is highly subjective, however, I find [seti-ui](https://atom.io/themes/seti-ui) and [seti-syntax](https://atom.io/themes/seti-syntax) very pleasant.
+-   The choice of UI Theme and Syntax Theme is highly subjective. I find [seti-ui](https://atom.io/themes/seti-ui) and [seti-syntax](https://atom.io/themes/seti-syntax) very pleasant.
 
 ## LaTeX
 -   [TeXLive](https://www.tug.org/texlive/acquire-netinstall.html) works with atom-latex, MiKTeX does not
