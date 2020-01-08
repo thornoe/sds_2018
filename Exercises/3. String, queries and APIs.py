@@ -79,10 +79,7 @@ resp_json_str
 pprint.pprint(response.json)
 
 
->> 1) How many beers are in the JSON object?
->>
->> 2) Print the names of the beers in the JSON object using lower case characters.
->>
->> 3) Select the beer called Paradox Islay from the JSON object.
->>
->> 4) Which hop ingredients does the Paradox Islay contain?
+# 1) How many beers are in the JSON object?
+# 2) Print the names of the beers in the JSON object using lower case characters.
+# 3) Select the beer called Paradox Islay from the JSON object.
+# 4) Which hop ingredients does the Paradox Islay contain?
